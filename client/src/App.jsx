@@ -6,9 +6,9 @@ const App = () => {
       <div className="color-nav">
         <Navbar />
         <Home />
+        <Exchange/>
+        <Ledger />
       </div>
-      <Exchange />
-      <Ledger />
       <Footer />
     </div>
   );

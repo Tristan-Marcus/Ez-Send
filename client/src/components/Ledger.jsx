@@ -1,6 +1,8 @@
 const Ledger = () => {
     return (
-        <h1>Ledger</h1>
+        <div className="flex flex-col w-full h-screen md:justify-center items-center">
+            Ledger
+        </div>
     );
 }
 

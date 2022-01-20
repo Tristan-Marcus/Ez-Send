@@ -1,6 +1,8 @@
 const Exchange = () => {
     return (
-        <h1>Exchange</h1>
+        <div className="flex flex-col w-full h-screen md:justify-center items-center">
+            Exchange
+        </div>
     );
 }
 

@@ -55,8 +55,6 @@ const Navbar = () => {
                     Login
                 </li>
             </ul>
-
-            
         </nav>
     );
 }
