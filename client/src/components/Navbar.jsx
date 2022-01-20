@@ -4,10 +4,11 @@ import { HiMenu } from 'react-icons/hi';
 import { IoIosClose } from 'react-icons/io';
 
 import logo from '../../images/logo.png';
+import metamask from '../../images/metamask.png';
 
 const NavbarItem = ( {title, props} ) => {
     return (
-        <li className={`mx-4 cursor-pointer rounded-full hover:text hover:text-[gold] transition ease-in-out ${props}`}>
+        <li className={`font-semibold mx-4 cursor-pointer rounded-full hover:text hover:text-[gold] transition ease-in-out ${props}`}>
             {title}
         </li>
     )
@@ -16,7 +17,11 @@ const NavbarItem = ( {title, props} ) => {
 const Navbar = () => {
     const [toggleBurgerMenu, setToggleBurgerMenu] = React.useState(false);
 
-    const navLinks = ["Home", "Exchange", "Ledger", "Wallets"];
+    const navLinks = ["Home", "Exchange", "Ledger"];
+
+    const connectWallet = () => {
+
+    }
 
     return (
         <nav className='w-full flex justify-between items-center pl-5 p-4'>
@@ -27,8 +32,8 @@ const Navbar = () => {
                 
                 {toggleBurgerMenu && (
                     <ul
-                        className="z-10 fixed top-0 -left-2 p-3 w-[65vw] h-screen shadow-2xl md:hidden list-none
-                         flex flex-col justify-start items-start rounded-md blue-glassmorphism text-white animate-slide-in
+                        className="z-10 fixed top-0 -left-2 p-3 w-[65vw] h-full shadow-2xl md:hidden list-none
+                         flex flex-col justify-start items-start rounded-md blue-glass text-white animate-slide-in
                         ">
                         <li className="text-[50px] pb-3 w-full my-2">
                             <IoIosClose className="hover:text-[black]" onClick={() => setToggleBurgerMenu(false)} />
@@ -51,9 +56,10 @@ const Navbar = () => {
                     <NavbarItem title={item} key={item + index} />
                 ))}
 
-                <li className="bg-[#EAA635] text-black py-2 px-7 mx-4 rounded-full cursor-pointer hover:bg-[#000000] hover:text-white transition ease-in-out hover:ring hover:ring-gold-300">
-                    Login
-                </li>
+                <button className="ml-2 flex flex-row my-5 bg-[#EAA635] p-3 rounded-full hover:bg-[#000000] hover:text-white transition ease-in-out hover:ring" type="button" onClick={connectWallet}>
+                    <p className="font-semibold">Connect your Wallet </p> <img src={metamask} alt="metamask" className="pl-5 w-12 cursor-pointer"/>
+                </button>
+
             </ul>
         </nav>
     );
