@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { ExchangeContext } from "../context/ExchangeContext";
 
 import { HiMenu } from 'react-icons/hi';
 import { IoIosClose } from 'react-icons/io';
@@ -17,11 +18,9 @@ const NavbarItem = ( {title, props} ) => {
 const Navbar = () => {
     const [toggleBurgerMenu, setToggleBurgerMenu] = React.useState(false);
 
+    const { connectWallet, connectedAccount } = useContext(ExchangeContext);
+
     const navLinks = ["Home", "Exchange", "Ledger"];
-
-    const connectWallet = () => {
-
-    }
 
     return (
         <nav className='w-full flex justify-between items-center pl-5 p-4'>
@@ -55,10 +54,14 @@ const Navbar = () => {
                 {navLinks.map( (item, index) => (
                     <NavbarItem title={item} key={item + index} />
                 ))}
-
-                <button className="ml-2 flex flex-row my-5 bg-[#EAA635] p-3 rounded-full hover:bg-[#000000] hover:text-white transition ease-in-out hover:ring" type="button" onClick={connectWallet}>
-                    <p className="font-semibold">Connect your Wallet </p> <img src={metamask} alt="metamask" className="pl-5 w-12 cursor-pointer"/>
-                </button>
+                {!connectedAccount && (
+                    <button className="ml-2 flex flex-row my-5 bg-[#EAA635] p-3 rounded-full hover:bg-[#000000] hover:text-white transition ease-in-out hover:ring" 
+                            type="button" 
+                            onClick={connectWallet}>
+                        <p className="font-semibold">Connect your Wallet </p> <img src={metamask} alt="metamask" className="pl-5 w-12 cursor-pointer"/>
+                    </button>
+                )}
+                
 
             </ul>
         </nav>
