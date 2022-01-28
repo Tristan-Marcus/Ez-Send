@@ -38,9 +38,9 @@ const Exchange = () => {
     }
 
     return (
-        <div className="flex flex-col w-full h-screen items-center">
+        <div className="flex flex-col w-full mt-20 items-center">
 
-            <div className="p-10 sm:w-96 md:w-[60vw] flex flex-col justify-start items-center blue-glass">
+            <div className="p-10 sm:w-96 md:w-[30vw] flex flex-col justify-start items-center blue-glass">
                 <p className="text-white text-3xl pb-3">Exchange</p>
                 <Input placeholder="Address" name="recipient" type="text" handleChange={handleChange}/>
                 <Input placeholder="Amount (ETH)" name="amount" type="number" handleChange={handleChange}/>
@@ -52,7 +52,7 @@ const Exchange = () => {
                 {false ? (
                     <LoadingAnimation />
                 ) : (
-                    <button className="md:text-3xl flex flex-row h-[8vh] w-[40vw] md:w-[50vw] justify-center items-center black-glass p-3 rounded-3xl hover:bg-[#0046] hover:text-white transition ease-in-out font-semibold" 
+                    <button className="md:text-3xl flex flex-row h-[8vh] w-[25vw] md:w-[25vw] justify-center items-center black-glass p-3 rounded-3xl hover:bg-[#0046] hover:text-white transition ease-in-out font-semibold" 
                         type="button" 
                         onClick={handleSubmit}>
 
