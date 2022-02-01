@@ -17,14 +17,14 @@ const Input = ({ placeholder, name, type, amount, handleChange }) => (
 )
 
 const Exchange = () => {
-    const { connectWallet, connectedAccount, formData, handleChange, sendCrypto } = useContext(ExchangeContext);
+    const { connectWallet, connectedAccount, formData, handleChange, sendCrypto, isLoading } = useContext(ExchangeContext);
 
     const handleSubmit = (e) => {
-        const { recipient, amount, message } = formData
+        const { receiver, amount, message } = formData
 
         e.preventDefault();
 
-        if(!recipient || !amount || !message) return (console.log("lul"));
+        if(!receiver || !amount || !message) return (console.log("Transaction was not sent."));
 
         sendCrypto();
     }
@@ -42,14 +42,14 @@ const Exchange = () => {
 
             <div className="p-10 sm:w-96 md:w-[30vw] flex flex-col justify-start items-center blue-glass">
                 <p className="text-white text-3xl pb-3">Exchange</p>
-                <Input placeholder="Address" name="recipient" type="text" handleChange={handleChange}/>
+                <Input placeholder="Address" name="receiver" type="text" handleChange={handleChange}/>
                 <Input placeholder="Amount (ETH)" name="amount" type="number" handleChange={handleChange}/>
                 <Input placeholder="Message" name="message" type="text" handleChange={handleChange}/>
 
                 <div className="h-[1px] w-full bg-gray-400 my-2">
                 </div>
 
-                {false ? (
+                {isLoading ? (
                     <LoadingAnimation />
                 ) : (
                     <button className="md:text-3xl flex flex-row h-[8vh] w-[25vw] md:w-[25vw] justify-center items-center black-glass p-3 rounded-3xl hover:bg-[#0046] hover:text-white transition ease-in-out font-semibold" 

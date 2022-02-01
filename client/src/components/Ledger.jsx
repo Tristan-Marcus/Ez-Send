@@ -6,7 +6,7 @@ import { shortenString } from '../utils/shortenString';
 
 import testData from '../utils/testData';
 
-const TransactionCard = ({ addressFrom, recipient, timestamp, message, amount }) => {
+const TransactionCard = ({ sender, receiver, time, message, amount }) => {
     return (
         <div className="bg-[#181918] m-4 flex flex-1
           2xl:min-w-[450px]
@@ -17,12 +17,12 @@ const TransactionCard = ({ addressFrom, recipient, timestamp, message, amount })
         ">
             <div className="flex flex-col items-center w-full mt-3">
                 <div className="w-full mb-6 p-2">
-                    <a href={`https://ropsten.etherscan.io/address/${addressFrom}`} target="_blank" rel="noopener noreferrer">
-                        <p className="text-white text-base">From: {shortenString(addressFrom)}</p>
+                    <a href={`https://ropsten.etherscan.io/address/${sender}`} target="_blank" rel="noopener noreferrer">
+                        <p className="text-white text-base">From: {shortenString(sender)}</p>
                     </a>
 
-                    <a href={`https://ropsten.etherscan.io/address/${recipient}`} target="_blank" rel="noopener noreferrer">
-                        <p className="text-white text-base">To: {shortenString(recipient)}</p>
+                    <a href={`https://ropsten.etherscan.io/address/${receiver}`} target="_blank" rel="noopener noreferrer">
+                        <p className="text-white text-base">To: {shortenString(receiver)}</p>
                     </a>
 
                     <p className="text-white text-base">Amount: {amount} ETH</p>
@@ -34,7 +34,7 @@ const TransactionCard = ({ addressFrom, recipient, timestamp, message, amount })
                     )}
 
                     <div className="bg-black p-3 px-5 w-man rounded-3xl mt-5 shadow-2xl">
-                        <p className="text-[lightblue] font-bold">{timestamp}</p>
+                        <p className="text-[lightblue] font-bold">{time}</p>
                     </div>
 
                 </div>
@@ -45,7 +45,7 @@ const TransactionCard = ({ addressFrom, recipient, timestamp, message, amount })
 }
 
 const Ledger = () => {
-    const { connectedAccount } = useContext(ExchangeContext);
+    const { connectedAccount, transactions } = useContext(ExchangeContext);
 
     return (
         <div className="flex w-full justify-center items-center 2xl:px-20">
@@ -57,7 +57,7 @@ const Ledger = () => {
                 )}
 
                 <div className="flex flex-wrap justify-center items-center mt-10">
-                    {testData.reverse().map((transaction, i) => (
+                    {transactions.reverse().map((transaction, i) => (
                         <TransactionCard key={i} {...transaction} />
                     ))}
                 </div>

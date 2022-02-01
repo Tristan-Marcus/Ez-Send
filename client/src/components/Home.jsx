@@ -3,8 +3,6 @@ import { FiArrowDownCircle } from 'react-icons/fi'
 import { BsArrowLeftRight } from 'react-icons/bs'
 
 const Home = () => {
-    
-
     return (
         <div className="flex flex-col w-full h-screen md:justify-center items-center sf-font">
             <div className="flex md:flex-row flex-col items-start justify-between md:p-18 pt-6 pb-12 px-4">

@@ -17,16 +17,40 @@ const getEthereumContract = () => {
 
 export const ExchangeProvider = ({ children }) => {
     const [connectedAccount, setConnectedAccount] = useState('');
-    const [formData, setFormData] = useState({ recipient: '', amount: '', message: '' });
+    const [formData, setFormData] = useState({ receiver: '', amount: '', message: '' });
     const [isLoading, setIsLoading] = useState(false);
-    const [exchangeCount, setExchangeCount] = useState(localStorage.getItem('exchangeCount'))
+    const [exchangeCount, setExchangeCount] = useState(localStorage.getItem('exchangeCount'));
+    const [transactions, setTransactions] = useState([]);
 
     const handleChange = (e, name) => {
         setFormData((prevState) => ({ ...prevState, [name]: e.target.value}));
     }
 
+    const getTransactions = async () => {
+        try {
+            if(!ethereum) return alert("Please connect your MetaMask Wallet");
+            
+            const exchangeContract = getEthereumContract();
+            const availableTransactions = await exchangeContract.getTransactions();
+
+            const organizedTransactions = availableTransactions.map((transactions) => ({
+                sender: transactions.sender,
+                receiver: transactions.receiver,
+                amount: parseInt(transactions.amount._hex) / (10 ** 18),
+                message: transactions.message,
+                time: new Date(transactions.time.toNumber() * 1000).toLocaleString(),
+            }))
+
+            console.log(organizedTransactions);
+            setTransactions(organizedTransactions);
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const checkWalletConnection = async () => {
-        try{
+        try {
             if(!ethereum) return alert("Please connect your MetaMask Wallet");
             
             const wallets = await ethereum.request({ method: 'eth_accounts' });
@@ -34,13 +58,25 @@ export const ExchangeProvider = ({ children }) => {
             if(wallets.length) {
                 setConnectedAccount(wallets[0]);
     
-                // getAllTransactions();
+                getTransactions();
             } else {
                 console.log("No wallets connected.");
             }
         } catch (error) {
             console.log(error);
             throw new Error("Cannot connect wallet.");
+        }
+    }
+
+    const checkIfTransactionsExist = async () => {
+        try {
+            const exchangeContract = getEthereumContract();
+            const exchangeCount = await exchangeContract.getExchangeCounter();
+
+            window.localStorage.setItem("exchangeCount", exchangeCount)
+        } catch (error) {
+            console.log(error);
+            throw new Error("Cannot send crypto")
         }
     }
 
@@ -61,7 +97,7 @@ export const ExchangeProvider = ({ children }) => {
         try {
             if(!ethereum) return alert("Please connect your MetaMask Wallet");
 
-            const { recipient, amount, message } = formData;
+            const { receiver, amount, message } = formData;
             const exchangeContract = getEthereumContract();
 
             // This converts amount from eth to gwei
@@ -71,13 +107,13 @@ export const ExchangeProvider = ({ children }) => {
                 method: 'eth_sendTransaction',
                 params: [{
                     from: connectedAccount,
-                    to: recipient,
+                    to: receiver,
                     gas: '0x5208', // 21000 GWEI = 0.000021 ETH
                     value: parsedAmount._hex,
                 }]
             });
 
-            const transactionHash = await exchangeContract.connectBlockchain(recipient, parsedAmount, message)
+            const transactionHash = await exchangeContract.connectBlockchain(receiver, parsedAmount, message)
 
             setIsLoading(true);
             console.log(`Transaction ${transactionHash.hash} is Loading...`);
@@ -90,6 +126,8 @@ export const ExchangeProvider = ({ children }) => {
 
             setExchangeCount(exchangeCount.toNumber());
 
+            window.BeforeUnloadEvent();
+
         } catch (error) {
             console.log(error);
 
@@ -99,10 +137,11 @@ export const ExchangeProvider = ({ children }) => {
 
     useEffect(() => {
         checkWalletConnection();
+        checkIfTransactionsExist();
     }, [])
 
     return (
-        <ExchangeContext.Provider value={{ connectWallet, connectedAccount, formData, setFormData, handleChange, sendCrypto }}>
+        <ExchangeContext.Provider value={{ connectWallet, connectedAccount, formData, setFormData, handleChange, sendCrypto, transactions, isLoading, }}>
             {children}
         </ExchangeContext.Provider>
     );
