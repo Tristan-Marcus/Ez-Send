@@ -9,17 +9,17 @@ const DetailsCard = ({ color, title, icon, subtitle }) => (
         </div>
         <div className="ml-5 flex flex-col flex-1">
             <h1 className="mt-2 text-white text-lg">{title}</h1>
-            <p className="mt-2 text-white text-sm md:w-9/12">{subtitle}</p>
+            <p className="text-base mt-2 text-white text-sm md:w-9/12">{subtitle}</p>
         </div>
     </div>
 )
 
 const Details = () => {
     return (
-        <div className="flex flex-col w-full justify-start items-center -mt-20">
+        <div className="flex flex-col w-full justify-start items-center -mt-20 sf-font">
             <div className="flex mf:flex-row flex-col items-center justify-between md:p-20 px-4">
                 <div className="flex-1 flex flex-col justify-start sm:items-start items-center">
-                    <h1 className="text-white text-2xl sm:text-5xl py-2 text-gradient"> 
+                    <h1 className="text-white text-2xl sm:text-5xl py-2"> 
                         You've never used an Exchange
                         <br />
                         this sexy and simple
@@ -30,22 +30,22 @@ const Details = () => {
                 <DetailsCard 
                     color="bg-[#2952E3]"
                     title="Sexy Guaranteed"
-                    icon={<AiOutlineCrown fontSize={21} className="text-white" />}
-                    subtitle="Sexy is our number one priority. We want our exchange to make our users feel good"
+                    icon={<AiOutlineCrown fontSize={22} className="text-white" />}
+                    subtitle="Sexy is our number one priority. We want our exchange to make our users feel good."
                 />
 
                 <DetailsCard 
                     color="bg-[#6BA925]"
                     title="Zero Downtime"
-                    icon={<AiOutlineThunderbolt fontSize={21} className="text-white" />}
+                    icon={<AiOutlineThunderbolt fontSize={22} className="text-white" />}
                     subtitle="All Transactions are as fast as the blockchain. Just like lightning!"
                 />
 
                 <DetailsCard 
                     color="bg-[#C32929]"
                     title="Secure Transactions"
-                    icon={<RiShieldStarLine fontSize={21} className="text-white" />}
-                    subtitle="In combination with Metamask, transactions made through us keep you protected"
+                    icon={<RiShieldStarLine fontSize={22} className="text-white" />}
+                    subtitle="In combination with Metamask, transactions made through us keep you protected."
                 />
             </div>
         </div>

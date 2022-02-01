@@ -1,5 +1,30 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap");
 
+@font-face {
+  font-family: 'SF';
+  src: local('SFFonts'), url(./fonts/SFFonts/SF-Pro-Display-Regular.otf) format('opentype');
+}
+@font-face {
+  font-family: 'SF-round-reg';
+  src: local('SFFonts'), url(./fonts/SFFonts/SF-Pro-Rounded-Regular.otf) format('opentype');
+}
+@font-face {
+  font-family: 'SF-thin';
+  src: local('SFFonts'), url(./fonts/SFFonts/SF-Pro-Rounded-Thin.otf) format('opentype');
+}
+@font-face {
+  font-family: 'SF-reg';
+  src: local('SFFonts'), url(./fonts/SFFonts/SF-Pro-Text-Regular.otf) format('opentype');
+}
+
+.sf-font {
+  font-family: SF-thin;
+}
+
+.sf-font-reg {
+  font-family: SF-round-reg
+}
+
 * html {
   padding: 0;
   margin: 0;
@@ -8,7 +33,7 @@
 
 * body {
   margin: 0;
-  font-family: "Open Sans," sans-serif;
+  font-family: 'Open-sans' sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -22,11 +47,23 @@
 
   background-image:
     radial-gradient(at 0% 100%, rgba(255, 196, 0, 0.267) 0, transparent 60%),
-    radial-gradient(at 0% 100%, rgb(255, 196, 0) 0, transparent 60%);
+    radial-gradient(at 0% 100%, rgba(50, 118, 221, 0.904) 0, transparent 60%);
+}
+
+.color-nav2 {
+  background-color:#000000;
+  backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+
+  background-image:
+    radial-gradient(at 0% 100%, rgba(255, 196, 0, 0.267) 0, transparent 60%),
+    radial-gradient(at 0% 100%, rgba(127, 221, 50, 0.904) 0, transparent 60%);
 }
 
 .blue-glass {
-  background: rgba(19, 77, 170, 0.582);
+  background: rgba(75, 75, 77, 0.582);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgb(204, 173, 0);
   -webkit-backdrop-filter: blur(5px);
@@ -39,6 +76,12 @@
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.footer-black-glass {
+  background: rgba(0, 0, 0, 0.753);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
 
 .text-gradient {

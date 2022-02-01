@@ -10,7 +10,7 @@ ReactDOM.render(
   <ExchangeProvider>
     <React.StrictMode>
       <App />
-    </React.StrictMode>,
+    </React.StrictMode>
   </ExchangeProvider>,
   document.getElementById('root')
 )

@@ -46,8 +46,8 @@ const Navbar = () => {
                 
             </div>
             
-            <div className="md:flex-[0.8] flex-initial justify-center items-center">
-                <img src={logo} alt="logo" className="w-42 cursor-pointer"/>
+            <div className="md:flex-[0.8] flex-initial flex-row justify-center items-center">
+                <img src={logo} alt="logo" className="w-50 cursor-pointer"/>
             </div>
             
             <ul className="text-white md:flex hidden flex-row justify-between items-center flex-initial pr-[100px]">
@@ -55,7 +55,7 @@ const Navbar = () => {
                     <NavbarItem title={item} key={item + index} />
                 ))}
                 {!connectedAccount && (
-                    <button className="ml-2 flex flex-row my-5 bg-[#EAA635] p-3 rounded-full hover:bg-[#000000] hover:text-white transition ease-in-out hover:ring" 
+                    <button className="ml-2 flex flex-row my-5 bg-[#ECD032] p-3 rounded-full hover:bg-[#000000] text-black hover:text-white transition ease-in-out hover:ring" 
                             type="button" 
                             onClick={connectWallet}>
                         <p className="font-semibold">Connect your Wallet </p> <img src={metamask} alt="metamask" className="pl-5 w-12 cursor-pointer"/>

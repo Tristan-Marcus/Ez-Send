@@ -65,7 +65,7 @@ const Exchange = () => {
             </div>
 
             {!connectedAccount && (
-                <button className="flex flex-row justify-center items-center my-5 bg-[gold] p-3 rounded-full cursor-pointer hover:bg-[#000000] hover:text-white transition ease-in-out hover:ring" 
+                <button className="flex flex-row justify-center items-center my-5 bg-[#ECD032] p-3 rounded-full cursor-pointer hover:bg-[#000000] hover:text-white transition ease-in-out hover:ring" 
                         type="button" 
                         onClick={ connectWallet }>
 
