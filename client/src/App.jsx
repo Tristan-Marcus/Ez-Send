@@ -6,7 +6,7 @@ const App = () => {
       <div id="home-container">
         <Navbar />
         <Home />
-        <div className="flex-1 flex flex-col md:flex-row items-center mb-60" id="exchange-container">
+        <div className="flex-1 flex flex-col md:flex-row items-center mb-60 pt-24" id="exchange-container">
           <Details />
           <Exchange />
         </div>
