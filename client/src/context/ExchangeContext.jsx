@@ -59,6 +59,9 @@ export const ExchangeProvider = ({ children }) => {
                 setConnectedAccount(wallets[0]);
     
                 getTransactions();
+
+                window.reload();
+
             } else {
                 console.log("No wallets connected.");
             }
@@ -126,7 +129,7 @@ export const ExchangeProvider = ({ children }) => {
 
             setExchangeCount(exchangeCount.toNumber());
 
-            window.BeforeUnloadEvent();
+            window.reload();
 
         } catch (error) {
             console.log(error);

@@ -34,7 +34,7 @@ const TransactionCard = ({ sender, receiver, time, message, amount }) => {
                     )}
 
                     <div className="bg-black p-3 px-5 w-man rounded-3xl mt-5 shadow-2xl">
-                        <p className="text-[lightblue] font-bold">{time}</p>
+                        <p className="text-[gold] font-bold">{time}</p>
                     </div>
 
                 </div>

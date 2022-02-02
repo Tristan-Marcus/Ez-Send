@@ -38,7 +38,7 @@ const Exchange = () => {
     }
 
     return (
-        <div className="flex flex-col w-full mt-20 items-center">
+        <div className="flex flex-col mt-10 sm:mt-20 w-full md:pt-40 items-center">
 
             <div className="p-10 sm:w-96 md:w-[30vw] flex flex-col justify-start items-center blue-glass">
                 <p className="text-white text-3xl pb-3">Exchange</p>

@@ -4,6 +4,7 @@ import { ExchangeContext } from "../context/ExchangeContext";
 import { HiMenu } from 'react-icons/hi';
 import { IoIosClose } from 'react-icons/io';
 
+import customerLogo from '../../images/BBlogo.png'
 import logo from '../../images/logo.png';
 import metamask from '../../images/metamask.png';
 
@@ -68,8 +69,8 @@ const Navbar = () => {
 
                     */}
             
-            <div className="md:flex-[0.8] flex-initial flex-row justify-center items-center">
-                <img src={logo} alt="logo" className="w-50 cursor-pointer"/>
+            <div className="md:flex-[0.8] flex-initial flex-row justify-center items-center md:pl-20">
+                <img src={logo} alt="logo" className="w-42 cursor-pointer"/>
             </div>
             
             <ul className="text-white md:flex hidden flex-row justify-between items-center flex-initial pr-[100px]">

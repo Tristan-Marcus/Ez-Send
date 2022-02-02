@@ -1,3 +1,4 @@
+import customerLogo from '../../images/BBlogo.png';
 import logo from '../../images/logo.png';
 
 import { homeButton, exchangeButton, ledgerButton } from '../utils/navigation';
@@ -5,9 +6,9 @@ import { homeButton, exchangeButton, ledgerButton } from '../utils/navigation';
 const Footer = () => {
     return (
         <div className="w-full flex md:justify-center justify-between items-center flex-col p-4">
-            <div className="w-full flex sm:flex-row flex-col justify-between items-center my-4">
+            <div className="w-full flex sm:flex-row flex-col justify-between items-center">
                 <div className="flex flex-[0.5] justify-center items-center">
-                    <img src={logo} alt="logo" className="w-32"/>
+                    <img src={logo} alt="logo" className="w-40"/>
                 </div>
                 <div className="flex flex-1 justify-evenly items-center flex-wrap sm:mt-0 mt-5 w-full">
                     <button 
