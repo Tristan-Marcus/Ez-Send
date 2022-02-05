@@ -76,6 +76,8 @@ export const ExchangeProvider = ({ children }) => {
     const [polygonExchangeCount, setPolygonExchangeCount] = useState(localStorage.getItem('polygonExchangeCount'));
     const [ethereumTransactions, setEthereumTransactions] = useState([]);
     const [polygonTransactions, setPolygonTransactions] = useState([]);
+    const [useEthereum, setUseEthereum] = useState(localStorage.getItem('ethereumNetwork'));
+    const [usePolygon, setUsePolygon] = useState(localStorage.getItem('polygonNetwork'));
     const [error, setError] = useState();
 
     const changeNetwork = async ({ networkName, setError }) => {
@@ -91,16 +93,40 @@ export const ExchangeProvider = ({ children }) => {
                         }
                     ]
                 });
+
+                window.localStorage.setItem("ethereumNetwork", true);
+                window.localStorage.setItem("polygonNetwork", false);
+                setUseEthereum(true); 
+                setUsePolygon(false);
             }
 
-            await ethereum.request({
-                method: "wallet_addEthereumChain",
-                params: [
-                    {
-                        ...networks[networkName]
-                    }
-                ]
-            });
+            else if(networkName === 'mumbai'){
+                await ethereum.request({
+                    method: "wallet_addEthereumChain",
+                    params: [
+                        {
+                            ...networks[networkName]
+                        }
+                    ]
+                });
+
+                window.localStorage.setItem("ethereumNetwork", false);
+                window.localStorage.setItem("polygonNetwork", true);
+                setUseEthereum(false); 
+                setUsePolygon(true);
+            }
+
+            else {
+                await ethereum.request({
+                    method: "wallet_addEthereumChain",
+                    params: [
+                        {
+                            ...networks[networkName]
+                        }
+                    ]
+                });
+            }
+            
         } catch (error) {
             setError(error.message);
             console.log(error)
@@ -321,7 +347,7 @@ export const ExchangeProvider = ({ children }) => {
     }, [])
 
     return (
-        <ExchangeContext.Provider value={{ connectWallet, connectedAccount, formData, setFormData, handleChange, handleNetworkChange, sendEthereum, sendMatic, ethereumTransactions, polygonTransactions, isLoading}}>
+        <ExchangeContext.Provider value={{ connectWallet, connectedAccount, formData, setFormData, handleChange, handleNetworkChange, sendEthereum, sendMatic, ethereumTransactions, polygonTransactions, isLoading, useEthereum, usePolygon}}>
             {children}
         </ExchangeContext.Provider>
     );

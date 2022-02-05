@@ -20,12 +20,9 @@ const Input = ({ placeholder, name, type, amount, handleChange }) => (
 )
 
 const Exchange = () => {
-    const [useEthereum, setUseEthereum] = useState(true);
-    const [usePolygon, setUsePolygon] = useState(false);
-
     const [open, setOpen] = useState(false);
 
-    const { connectWallet, connectedAccount, formData, handleChange, handleNetworkChange, sendEthereum, sendMatic, isLoading } = useContext(ExchangeContext);
+    const { connectWallet, connectedAccount, formData, handleChange, handleNetworkChange, sendEthereum, sendMatic, isLoading, useEthereum, usePolygon } = useContext(ExchangeContext);
 
     const handleSubmit = (e) => {
         const { receiver, amount, message } = formData
@@ -75,9 +72,7 @@ const Exchange = () => {
     
         return (
             <div className="border-2 absolute rounded-md border-slate-900 z-10 flex flex-col h-40 w-[190px] justify-center items-center font-semibold bg-[gray] mt-1">
-                <div onClick={ () => {  
-                    setUseEthereum(true); 
-                    setUsePolygon(false);
+                <div onClick={ () => {
                     handleNetworkChange("ropsten");
                     setOpen(!open);
                     }}
@@ -85,9 +80,7 @@ const Exchange = () => {
                     <img src={ ethlogo } alt="logo" className="w-[30px] mr-2"/> Ethereum
                 </div>
                 <div className="h-[1px] w-full bg-gray-400 my-2"/>
-                <div onClick={ () => {  
-                    setUseEthereum(false); 
-                    setUsePolygon(true);
+                <div onClick={ () => {
                     handleNetworkChange("mumbai");
                     setOpen(!open);
                     }} 
@@ -103,7 +96,7 @@ const Exchange = () => {
         {
             return ("(ETH)")
         }
-        else {
+        if(usePolygon == true) {
             return ("(MATIC)")
         }
     }
