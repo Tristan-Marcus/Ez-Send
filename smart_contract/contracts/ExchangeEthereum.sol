@@ -3,7 +3,7 @@
 // Set the solidity version
 pragma solidity ^0.8.0;
 
-contract Exchange {
+contract ExchangeEthereum {
     // Stores the number of transactions on the exchange
     uint256 ExchangeCount;
 

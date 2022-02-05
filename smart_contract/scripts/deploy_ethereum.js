@@ -1,10 +1,10 @@
 const main = async () => {
-  const Exchange = await hre.ethers.getContractFactory("Exchange");
-  const exchange = await Exchange.deploy();
+  const ExchangeEthereum = await hre.ethers.getContractFactory("ExchangeEthereum");
+  const exchange = await ExchangeEthereum.deploy();
 
   await exchange.deployed();
 
-  console.log("Exchange smart contract deployed to:", exchange.address);
+  console.log("Exchange (ethereum) smart contract deployed to:", exchange.address);
 }
 
 const runMain = async () => {
