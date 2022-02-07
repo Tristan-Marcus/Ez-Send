@@ -139,7 +139,6 @@ export const ExchangeProvider = ({ children }) => {
         location.reload();
     }
 
-
     const handleChange = (e, name) => {
         setFormData((prevState) => ({ ...prevState, [name]: e.target.value}));
     }
@@ -165,7 +164,7 @@ export const ExchangeProvider = ({ children }) => {
             
 
         } catch (error) {
-            console.log(error);
+            //console.log(error, "You might be using the polygon Network");
         }
     }
 
@@ -185,12 +184,12 @@ export const ExchangeProvider = ({ children }) => {
                 time: new Date(polygonTransactions.time.toNumber() * 1000).toLocaleString(),
             }))
 
-            console.log(organizedTransactions);
+            //console.log(organizedTransactions);
             
             setPolygonTransactions(organizedTransactions);
 
         } catch (error) {
-            console.log(error);
+            //console.log(error, "You might be using the ethereum Network");
         }
     }
     
@@ -203,9 +202,12 @@ export const ExchangeProvider = ({ children }) => {
     
             if(wallets.length) {
                 setConnectedAccount(wallets[0]);
-    
-                getEthereumTransactions();
-                getPolygonTransactions();
+
+                if(localStorage.getItem('ethereumNetwork') === "true") {
+                    getEthereumTransactions();
+                } else {
+                    getPolygonTransactions();
+                }
 
                 //location.reload();
 
@@ -225,8 +227,7 @@ export const ExchangeProvider = ({ children }) => {
 
             window.localStorage.setItem("ethereumExchangeCount", ethereumExchangeCount)
         } catch (error) {
-            console.log(error);
-            throw new Error("Cannot send crypto");
+            //console.log(error, "You might be using the polygon Network");
         }
     }
 
@@ -237,8 +238,7 @@ export const ExchangeProvider = ({ children }) => {
 
             window.localStorage.setItem("polygonExchangeCount", polygonExchangeCount)
         } catch (error) {
-            console.log(error);
-            throw new Error("Cannot send crypto");
+            //console.log(error, "You might be using the ethereum Network");
         }
     }
 
@@ -292,8 +292,6 @@ export const ExchangeProvider = ({ children }) => {
 
         } catch (error) {
             console.log(error);
-
-            throw new Error("Cannot send crypto")
         }
     }
 
@@ -334,17 +332,20 @@ export const ExchangeProvider = ({ children }) => {
 
         } catch (error) {
             console.log(error);
-
-            throw new Error("Cannot send crypto")
         }
     }
 
-
     useEffect(() => {
         checkWalletConnection();
-        checkIfEthereumTransactionsExist();
-        checkIfPolygonTransactionsExist();
-    }, [])
+
+        if(useEthereum) {
+            checkIfEthereumTransactionsExist();
+        }
+        
+        if(usePolygon) {
+            checkIfPolygonTransactionsExist();
+        }
+    }, [useEthereum, usePolygon])
 
     return (
         <ExchangeContext.Provider value={{ connectWallet, connectedAccount, formData, setFormData, handleChange, handleNetworkChange, sendEthereum, sendMatic, ethereumTransactions, polygonTransactions, isLoading, useEthereum, usePolygon}}>

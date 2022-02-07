@@ -21,6 +21,7 @@ const Input = ({ placeholder, name, type, amount, handleChange }) => (
 
 const Exchange = () => {
     const [open, setOpen] = useState(false);
+    const [tickerSymbol, setTickerSymbol] = useState("");
 
     const { connectWallet, connectedAccount, formData, handleChange, handleNetworkChange, sendEthereum, sendMatic, isLoading, useEthereum, usePolygon } = useContext(ExchangeContext);
 
@@ -31,7 +32,7 @@ const Exchange = () => {
 
         if(!receiver || !amount || !message) return (console.log("Transaction was not sent."));
 
-        if(useEthereum == true) {
+        if(localStorage.getItem('ethereumNetwork') === "true") {
             sendEthereum();
         } else {
             sendMatic();
@@ -91,15 +92,14 @@ const Exchange = () => {
         )
     }
 
-    function ticker() {
-        if(useEthereum === true) 
-        {
-            return ("(ETH)")
+    useEffect(() => {
+
+        if(localStorage.getItem('ethereumNetwork') === "true" && useEthereum) {
+            setTickerSymbol("ETH");
+        } else {
+            setTickerSymbol("MATIC");
         }
-        if(usePolygon == true) {
-            return ("(MATIC)")
-        }
-    }
+    }, [])
 
     return (
         <div className="flex flex-col mt-10 sm:mt-20 w-full md:pt-40 items-center">
@@ -110,7 +110,7 @@ const Exchange = () => {
                     <DropdownMenu /> 
                 </NetworkButton>
                 <Input placeholder="Address" name="receiver" type="text" handleChange={handleChange}/>
-                <Input placeholder={`Amount ${ticker()}`} name="amount" type="number" handleChange={handleChange}/>
+                <Input placeholder={`Amount ${tickerSymbol}`} name="amount" type="number" handleChange={handleChange}/>
                 <Input placeholder="Message" name="message" type="text" handleChange={handleChange}/>
 
                 <div className="h-[1px] w-full bg-gray-400 my-2">
@@ -140,6 +140,7 @@ const Exchange = () => {
                 </button>
             )} 
         </div>
+
     );
 }
 
